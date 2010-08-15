@@ -33,22 +33,3 @@ class CallTrace
 		@@trace_proc = p
 	end
 end
-
-class TraceTest
-	def sos(a,b)
-		a*a + b*b
-	end
-	class Inner
-		def huh(c,d)
-			c + d - (d - c)
-		end
-	end
-end
-
-CallTrace.trace(:ruby_method_calls) do
-	c = TraceTest.new
-	c.sos(3,4)
-	d = TraceTest::Inner.new
-	d.huh(5,6)
-end
-
