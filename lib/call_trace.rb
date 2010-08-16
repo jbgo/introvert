@@ -23,13 +23,16 @@ class CallTrace
 
 	# Convenience wrapper for tracing a specific block of code
 	def self.trace(proc_sym=nil)
-		self.use_trace_proc(&BUILTIN_PROCS[proc_sym]) if BUILTIN_PROCS.has_key?(proc_sym)
+		# self.use_trace_proc(&BUILTIN_PROCS[proc_sym]) if BUILTIN_PROCS.has_key?(proc_sym)
+		puts @@trace_proc.to_s
+		puts 'start trace'
 		self.start
 		yield
 		self.stop
+		puts 'stop trace'
 	end
 
-	def self.use_trace_proc(&p)
+	def self.use_trace_proc(p)
 		@@trace_proc = p
 	end
 end
