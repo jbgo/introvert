@@ -5,7 +5,7 @@ module CallTrace::Procs
 		Proc.new do |event, file, line, id, binding, classname|
 			if (event == 'call' || event == 'c-call') && classname.to_s != 'CallTrace'
 				stack = eval('caller', binding)
-				calling_method = self.method_name_from_caller(stack[0])
+				calling_method = self.method_name_from_caller(stack[1])
 				if methods.empty?
 					methods << id.to_s
 				elsif calling_method == methods.last
