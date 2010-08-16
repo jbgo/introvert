@@ -11,7 +11,7 @@ module CallTrace::Procs
 				elsif calling_method == methods.last
 					methods << id.to_s
 				elsif (i = methods.rindex(calling_method))
-					methods = methods[0, i]
+					methods = methods[0, i + 1]
 					methods << id.to_s
 				else
 					methods.clear
