@@ -1,6 +1,6 @@
 module CallTrace::Procs
 
-	def self.nested_method_calls
+	def self.call_tree
 		methods = [] # keep track of methods we've seen
 		Proc.new do |event, file, line, id, binding, classname|
 			if (event == 'call' || event == 'c-call') && classname.to_s != 'CallTrace'

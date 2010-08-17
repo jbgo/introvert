@@ -1,7 +1,7 @@
 class CallTrace
 
 	autoload :Procs, 'call_trace/procs'
-
+	
 	@@trace_proc = 
 		Proc.new do |event, file, line, id, binding, classname|
 			printf "%8s %s:%-2d %10s %8s\n", event, file, line, id, classname
@@ -20,6 +20,7 @@ class CallTrace
 
 	# Convenience wrapper for tracing a specific block of code
 	def self.trace(proc_sym=nil)
+		self.use_trace_proc(Procs.send(proc_sym)) if proc_sym
 		self.start
 		yield
 		self.stop
@@ -29,4 +30,5 @@ class CallTrace
 	def self.use_trace_proc(p, &b)
 		@@trace_proc = p or b
 	end
+
 end
