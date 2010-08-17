@@ -1,4 +1,7 @@
 class CallTrace
+
+	autoload :Procs, 'call_trace/procs'
+
 	@@trace_proc = 
 		Proc.new do |event, file, line, id, binding, classname|
 			printf "%8s %s:%-2d %10s %8s\n", event, file, line, id, classname
