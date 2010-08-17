@@ -20,7 +20,6 @@ class CallTrace
 
 	# Convenience wrapper for tracing a specific block of code
 	def self.trace(proc_sym=nil)
-		puts @@trace_proc.to_s
 		self.start
 		yield
 		self.stop
