@@ -6,41 +6,28 @@ module Introvert::Procs
 	end
 
 	def self.call_tree
-		methods = [] # keep track of methods we've seen
+		trace_call = /introvert\.rb:\d+:in `trace'$/
 		Proc.new do |event, file, line, id, binding, classname|
 			if (event == 'call' || event == 'c-call') && classname.to_s != 'Introvert'
 				stack = eval('caller', binding)
-				calling_method = self.method_name_from_caller(stack[1])
-				if methods.empty?
-					methods << id.to_s
-				elsif calling_method == methods.last
-					methods << id.to_s
-				elsif (i = methods.rindex(calling_method))
-					methods = methods[0, i + 1]
-					methods << id.to_s
-				else
-					methods.clear
-					methods << id.to_s
+				stack.each_with_index do |frame, index|
+					if frame =~ trace_call
+						if index <= 1 # in trace block
+							puts
+						else
+							puts '. ' * (index - 2) + classname.to_s + '.' + id.to_s + '() => ' +
+								   self.truncate_file_name(file) + ":(#{line}}"
+						end
+					end
 				end
-				puts ('. ' * (methods.size - 1)) +
-					self.classname_or_blank(classname) +
-				  id.to_s +
-					" --- #{file} (#{line})"
 			end
 		end
 	end
 
-	private
+	protected
 
-	def self.method_name_from_caller(str)
-		if str
-			m = str.match(/`(\w+)'/)
-			(m && m.captures.size > 0) ? m.captures[0] : nil
-		end
+	def self.truncate_file_name(fname)
+		r = fname.rindex('/') || 0
+		fname[r + 1, fname.length - r]
 	end
-
-	def self.classname_or_blank(cname)
-		cname ? cname.to_s + '.' : ''
-	end
-
 end

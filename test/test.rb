@@ -11,7 +11,7 @@ class TraceTest
 	end
 end
 
-Introvert.trace(:call_tree) do
+Introvert.trace do
 	c = TraceTest.new
 	c.sos(3,4)
 	d = TraceTest::Inner.new
