@@ -8,8 +8,7 @@ module Introvert
 	end
 	self.use_trace_proc(Introvert::Procs.all_events)
 
-	# Start tracing globally. If a proc is given to this method, use the
-	# given proc instead of the default proc.
+	# Start tracing globally
 	def self.start
 		set_trace_func @@trace_proc
 	end
