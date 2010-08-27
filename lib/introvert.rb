@@ -1,11 +1,12 @@
-class CallTrace
+module Introvert; end
+require File.join(File.dirname(__FILE__), 'introvert', 'procs')
 
-	autoload :Procs, 'call_trace/procs'
-	
-	@@trace_proc = 
-		Proc.new do |event, file, line, id, binding, classname|
-			printf "%8s %s:%-2d %10s %8s\n", event, file, line, id, classname
-		end
+module Introvert
+	# You can pass a proc object or a block, but not both
+	def self.use_trace_proc(p, &b)
+		@@trace_proc = p or b
+	end
+	self.use_trace_proc(Introvert::Procs.all_events)
 
 	# Start tracing globally. If a proc is given to this method, use the
 	# given proc instead of the default proc.
@@ -25,10 +26,5 @@ class CallTrace
 		yield
 		self.stop
 	end
-
-	# You can pass a proc object or a block, but not both
-	def self.use_trace_proc(p, &b)
-		@@trace_proc = p or b
-	end
-
 end
+

@@ -1,9 +1,14 @@
-module CallTrace::Procs
+module Introvert::Procs
+	def self.all_events
+		Proc.new do |event, file, line, id, binding, classname|
+			printf "%8s %s:%-2d %10s %8s\n", event, file, line, id, classname
+		end
+	end
 
 	def self.call_tree
 		methods = [] # keep track of methods we've seen
 		Proc.new do |event, file, line, id, binding, classname|
-			if (event == 'call' || event == 'c-call') && classname.to_s != 'CallTrace'
+			if (event == 'call' || event == 'c-call') && classname.to_s != 'Introvert'
 				stack = eval('caller', binding)
 				calling_method = self.method_name_from_caller(stack[1])
 				if methods.empty?

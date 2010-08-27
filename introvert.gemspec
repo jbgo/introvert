@@ -1,8 +1,8 @@
 Gem::Specification.new do |s|
-	s.name = 'call_trace'
+	s.name = 'introvert'
 	s.version = '0.0.1'
 	s.summary = 'Human friendly program execution analysis tool'
-	s.description = '...'
+	s.description = '..'
 	s.author = 'Jordan Bach'
 	s.email = 'jordanbach@gmail.com'
 	s.homepage = 'http://thisshouldbeeasy.com/'

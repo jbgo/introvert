@@ -29,7 +29,6 @@ end
 
 m = MyClass.new
 
-CallTrace.use_trace_proc(CallTrace::Procs.nested_method_calls)
-CallTrace.trace do
+Introvert.trace(:call_tree) do
 	m.foo
 end

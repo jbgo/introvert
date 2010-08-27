@@ -11,7 +11,7 @@ class TraceTest
 	end
 end
 
-CallTrace.trace(:ruby_method_calls) do
+Introvert.trace(:call_tree) do
 	c = TraceTest.new
 	c.sos(3,4)
 	d = TraceTest::Inner.new
