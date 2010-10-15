@@ -1,0 +1,21 @@
+=Introvert
+
+A module to easily trace and profile programs.
+
+The main purpose of this module is to allow me to trace method calls
+throughout the execution of a program to analyze a program's runtime
+behavior.
+
+==Quick Example
+
+  require 'introvert'
+  Introvert.trace(:call_tree) do
+    # ... some code of interest
+  end
+  => prints lots of interesting things
+
+==Installation
+
+  gem build introvert.gemspec
+  gem install introvert-0.0.1.gem
+
