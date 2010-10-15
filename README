@@ -1,7 +1,0 @@
-introvert
-
-A module to easily trace and profile programs.
-
-The main purpose of this module is to allow me to trace method calls
-throughout the execution of a program to analyze a program's runtime
-behavior.
